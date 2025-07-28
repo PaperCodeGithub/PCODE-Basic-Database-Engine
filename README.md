@@ -24,14 +24,79 @@ pip install paperbase
 
 ## 🧠 Usage
 ```
-from paperbase import auth, config, pdb
+from paperbase import config
+from paperbase import auth
+from paperbase import pdb
 
-config.connect("your-project-id")
-auth.signInUser("user@example.com", "password123")
+# === CONFIG MODULE ===
 
-pdb.insertData("user_data", "Name", "Aritra")
-data = pdb.retrieveData("user_data", "Name")
-print(data)
+# Create a new project (prints its UID)
+config.createNewProject("TestProject")
+
+# Optional: List all available projects
+config.listProjects()
+
+# Optional: Delete a project by name
+# config.deleteProject("TestProject")
+
+# Connect to a project by UID (from printed createNewProject())
+config.connect("YOUR_KEY")
+
+
+# === AUTH MODULE ===
+
+# Create a new user
+auth.createUser("Aritra@gmail.com", "password123")
+
+# Sign in an existing user
+auth.signInUser("Aritra@gmail.com", "password123")
+
+# Delete a user
+# auth.deleteUser("Aritra@gmail.com")
+
+
+# === PDB MODULE (DATABASE) ===
+
+# Create a new PaperBase called "Users"
+pdb.newPaperBase("Users")
+
+# Create subbases (e.g., per user/email)
+pdb.newPaperSubBase("Users", "Aritra@gmail.com")
+pdb.newPaperSubBase("Users", "Paper@gmail.com")
+
+# Insert data into subbases
+pdb.insertData("Users", subpath="Aritra@gmail.com", key="Name", value="Aritra")
+pdb.insertData("Users", subpath="Paper@gmail.com", key="Name", value="Paper")
+pdb.insertData("Users", subpath="Aritra@gmail.com", key="Role", value="Admin")
+
+# Retrieve specific data
+data = pdb.retrieveData("Users", "Name", subpath="Aritra@gmail.com")
+print("Retrieved Name for Aritra:", data)
+
+# Edit existing data
+pdb.editData("Users", subpath="Aritra@gmail.com", key="Role", new_value="SuperAdmin")
+
+# Retrieve again to verify edit
+updated_role = pdb.retrieveData("Users", "Role", subpath="Aritra@gmail.com")
+print("Updated Role for Aritra:", updated_role)
+
+# Retrieve all subbases under "Users"
+subbases = pdb.retrieveSubBases("Users")
+print("All subbases under 'Users':", subbases)
+
+# Retrieve all key-values in a subbase
+all_data = pdb.retrieveSubBaseDatas("Users", "Aritra@gmail.com")
+print("All data in Aritra's subbase:", all_data)
+
+# Delete specific data field
+pdb.deleteData("Users", subpath="Paper@gmail.com", key="Name")
+
+# Delete a subbase
+pdb.deletePaperSubBase("Users", "Paper@gmail.com")
+
+# Delete entire PaperBase
+# pdb.deletePaperBase("Users")
+
 ```
 ---
 ## 📃 License
