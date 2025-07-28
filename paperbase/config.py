@@ -7,17 +7,29 @@ UID = None
 def connect(id):
     global UID
     UID = id
-    # Create a directory structure similar to the one described
-    base_path = os.path.join("DB_USER", "projects", UID, "cret")
-    os.makedirs(base_path, exist_ok=True)
-    print("Connected to PaperDB...")
+    user_path = os.path.join("DB_USER", "projects", UID)
+
+    if not os.path.exists(user_path):
+        print(f"Error: Project ID '{UID}' does not exist. Please create it first.")
+        UID = None
+        return
+    
+    try:
+        with open(user_path + "/build.cfg") as build:
+            project_name = build.readline()
+            cret_path = os.path.join(user_path, "cret")
+            os.makedirs(cret_path, exist_ok=True)
+            print(f"Connected to Paperbase project...\n{project_name}")
+    except Exception as e:
+        print(f"Your project is corrupted.." + e)
+    
 
 def createNewProject(name):
     # Generate a unique ID
     unique_id = str(uuid.uuid4())
     print(f"Your project ID: {unique_id}")
     # Define the path for the new project folder
-    base_path = os.path.expanduser("~")  # Get the user's home directory
+    base_path = os.path.expanduser("DB_USER")  # Get the user's home directory
     project_path = os.path.join(base_path, "projects", unique_id)
     # Create the folder
     os.makedirs(project_path, exist_ok=True)
@@ -29,7 +41,7 @@ def createNewProject(name):
     return project_path
 
 def deleteProject(id):
-    base_path = os.path.expanduser("~")
+    base_path = os.path.expanduser("DB_USER")
     project_path = os.path.join(base_path, "projects\\" + id)
     # Check if the path exists
     if os.path.exists(project_path):
@@ -46,7 +58,7 @@ def deleteProject(id):
 
 def listProjects():
             # Define the base path for projects
-    base_path = os.path.expanduser("~")
+    base_path = os.path.expanduser("DB_USER")
     projects_path = os.path.join(base_path, "projects")
             
     project_names = []

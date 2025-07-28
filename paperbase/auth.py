@@ -2,8 +2,9 @@ import subprocess
 import os
 import hashlib
 from paperbase import config
+from paperbase import __file__ as base_file
 
-AUTH_EXEC = os.path.join("addon", "auth_handler.exe")
+AUTH_EXEC = os.path.join(os.path.dirname(base_file), "addon", "auth_handler.exe")
 
 
 def createUser(email, password):

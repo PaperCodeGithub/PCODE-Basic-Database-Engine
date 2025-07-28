@@ -1,3 +1,20 @@
+Metadata-Version: 2.4
+Name: paperbase
+Version: 0.1
+Summary: Simple file-based database with user auth
+Author: PaperCode
+Author-email: aritra.paper.code@gmail.com
+License: MIT
+Classifier: Programming Language :: Python :: 3
+Description-Content-Type: text/markdown
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: license
+Dynamic: summary
+
 # PaperBase
 
 **PaperBase** is a lightweight, file-based, plug-and-play database engine designed for quick data storage using native Python and optional C++ authentication handling.
