@@ -1,1 +1,63 @@
-# PCODE-Basic-Database-Engine
+# PaperBase
+
+**PaperBase** is a lightweight, file-based, plug-and-play database engine designed for quick data storage using native Python and optional C++ authentication handling.
+
+It is perfect for small projects, prototyping, or when you need a no-server, local-first database structure.
+
+---
+
+## 🔧 Features
+
+- File-system-based hierarchical database
+- Insert, retrieve, edit, and delete key-value data
+- User authentication using hashed passwords (with C++ auth handler)
+- Easy project switching with `connect()`
+- Modular access via `auth`, `config`, and `pdb`
+
+---
+
+## 🚀 Installation
+
+```
+pip install paperbase
+```
+
+## 🧠 Usage
+```
+from paperbase import auth, config, pdb
+
+config.connect("your-project-id")
+auth.signInUser("user@example.com", "password123")
+
+pdb.insertData("user_data", "Name", "Aritra")
+data = pdb.retrieveData("user_data", "Name")
+print(data)
+```
+---
+## 📃 License
+This project is licensed under the MIT License.
+
+### `LICENSE` (MIT License)
+```
+MIT License
+
+Copyright (c) 2025 YOUR_NAME
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the “Software”), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
